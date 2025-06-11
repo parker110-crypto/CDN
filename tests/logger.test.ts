@@ -1,4 +1,4 @@
-import { expect } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import winston from 'winston';
 import fs from 'fs';
 import path from 'path';
@@ -14,6 +14,10 @@ describe('File Retrieval Logger', () => {
     if (!fs.existsSync(logDir)) {
       fs.mkdirSync(logDir);
     }
+    
+    // Clear log files before each test
+    fs.writeFileSync(combinedLogPath, '');
+    fs.writeFileSync(errorLogPath, '');
   });
 
   it('should log file access', () => {
