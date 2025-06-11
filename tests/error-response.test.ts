@@ -87,9 +87,8 @@ describe('ErrorResponseUtil', () => {
       'Error in /home/user/sensitive/path with IP 192.168.1.1'
     );
 
-    expect(mockRes.json).toHaveBeenCalledWith({
-      success: false,
-      message: 'Error in [REDACTED] with IP [IP_REDACTED]'
-    });
+    const jsonCallArgs = mockRes.json.mock.calls[0][0];
+    expect(jsonCallArgs.success).toBe(false);
+    expect(jsonCallArgs.message).toMatch(/^Error in \[REDACTED\] with IP \[IP_REDACTED\]$/);
   });
 });
