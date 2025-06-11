@@ -62,7 +62,7 @@ export class ErrorResponseUtil {
   private static sanitizeErrorMessage(message: string): string {
     // Remove any potentially sensitive system information
     return message
-      .replace(/\/[^/]+\//g, '[REDACTED]')
+      .replace(/\/.*\//g, '[REDACTED]')
       .replace(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/, '[IP_REDACTED]');
   }
 
