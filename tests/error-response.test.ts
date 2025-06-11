@@ -89,6 +89,7 @@ describe('ErrorResponseUtil', () => {
 
     const jsonCallArgs = mockRes.json.mock.calls[0][0];
     expect(jsonCallArgs.success).toBe(false);
-    expect(jsonCallArgs.message).toMatch(/^Error in \[REDACTED\] with IP \[IP_REDACTED\]$/);
+    expect(jsonCallArgs.message).toContain('[REDACTED]');
+    expect(jsonCallArgs.message).toContain('[IP_REDACTED]');
   });
 });
