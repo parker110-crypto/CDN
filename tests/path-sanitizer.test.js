@@ -14,13 +14,11 @@ describe('Path Sanitizer Middleware', () => {
     status: vi.fn().mockReturnThis(),
     json: vi.fn(),
   });
-  
-  const createMockNext = vi.fn();
 
   it('should allow safe file paths within CDN root', () => {
     const req = createMockRequest('images/logo.png');
     const res = createMockResponse();
-    const next = createMockNext;
+    const next = vi.fn();
     
     const middleware = createPathSanitizer(mockCdnRoot);
     
@@ -34,7 +32,7 @@ describe('Path Sanitizer Middleware', () => {
     const maliciousPath = '../../../etc/passwd';
     const req = createMockRequest(maliciousPath);
     const res = createMockResponse();
-    const next = createMockNext;
+    const next = vi.fn();
     
     const middleware = createPathSanitizer(mockCdnRoot);
     
@@ -56,7 +54,7 @@ describe('Path Sanitizer Middleware', () => {
     const encodedPath = encodeURIComponent('../secret/file.txt');
     const req = createMockRequest(encodedPath);
     const res = createMockResponse();
-    const next = createMockNext;
+    const next = vi.fn();
     
     const middleware = createPathSanitizer(mockCdnRoot);
     
